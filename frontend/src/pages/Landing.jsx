@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../api.js';
 import { money } from '../format.js';
+import { imageUrl } from '../api.js';
 
 export default function Landing() {
   const [rooms, setRooms] = useState([]);
@@ -9,13 +10,19 @@ export default function Landing() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    Promise.all([api.roomTypes(), api.hotelInfo()])
-      .then(([r, i]) => {
-        setRooms(r);
-        setInfo(i);
-      })
-      .catch((e) => setError(e.message));
-  }, []);
+  Promise.all([api.roomTypes(), api.hotelInfo()])
+    .then(([r, i]) => {
+      const roomsWithFormattedImages = r.map((room) => ({
+        ...room,
+        image_url: imageUrl(room.image_url),
+      }));
+
+      setRooms(roomsWithFormattedImages);
+      setInfo(i);
+      console.log(rooms);
+    })
+    .catch((e) => setError(e.message));
+}, []);
 
   return (
     <>
@@ -43,7 +50,16 @@ export default function Landing() {
         <div className="grid">
           {rooms.map((r, i) => (
             <article key={r.id} className="card room">
-              <div className={`room-banner tone-${i % 5}`}>
+              <div 
+                className={`room-banner tone-${i % 5}`} 
+                    style={{ 
+                      backgroundImage: `url(${r.image_url})`,
+                      backgroundSize: 'cover',      
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                      height: '200px'               
+                    }}
+              >
                 <span>{r.sizeM2} m²</span>
               </div>
               <div className="card-body">

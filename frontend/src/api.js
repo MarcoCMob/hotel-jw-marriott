@@ -1,5 +1,4 @@
 const BASE = import.meta.env.VITE_API_URL || '/api';
-
 async function request(path, options = {}) {
   let res;
   try {
@@ -25,3 +24,9 @@ export const api = {
 };
 
 export const ticketUrl = (code) => `${BASE}/reservations/${code}/ticket`;
+
+export const imageUrl = (imageName) => {
+  if (!imageName) return '';
+  if (imageName.startsWith('http')) return imageName;
+  return `/images/${imageName}`;
+};

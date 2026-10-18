@@ -29,6 +29,7 @@ const mapRoomType = (r) => ({
   beds: r.beds,
   sizeM2: r.size_m2,
   pricePerNight: Number(r.price_per_night),
+  image_url: r.image_url,
   amenities: r.amenities.split(',').map((a) => a.trim()),
   ...(r.available !== undefined ? { available: Number(r.available) } : {}),
 });
