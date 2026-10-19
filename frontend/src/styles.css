@@ -1,6 +1,8 @@
 :root {
   --bg: #faf7f2;
   --ink: #1d1a17;
+  --ink-text-area: #1d1a17;
+  --navcolor: #1d1a17;
   --muted: #7a7469;
   --accent: #8a1c2b;
   --accent-dark: #6d1522;
@@ -10,6 +12,34 @@
   --ok: #2e7d4f;
   --danger: #b3261e;
 }
+
+/* Redefines las mismas variables cuando el tema sea oscuro */
+[data-theme="dark"] {
+  --bg: #12100e;
+  --ink: #f2eee9;
+  --muted: #a39c90;
+  --accent: #b82338;
+  --accent-dark: #d62841;
+  --gold: #d4a359;
+  --line: #2c2722;
+  --card: #1c1815;
+  --ok: #3db36b;
+  --danger: #cf453c;
+}
+
+/* Ajustes opcionales para elementos específicos en modo oscuro */
+[data-theme="dark"] .btn-ghost:hover {
+  background: #27221d;
+}
+
+[data-theme="dark"] .band {
+  background: #1a1613;
+}
+
+[data-theme="dark"] .chip {
+  background: #1e1915;
+}
+
 
 * { box-sizing: border-box; }
 body {
@@ -37,7 +67,7 @@ p { margin: 0 0 .6rem; }
 .right { text-align: right; }
 
 /* Nav */
-.nav { background: var(--ink); color: #fff; position: sticky; top: 0; z-index: 10; }
+.nav { background: var(--navcolor); color: #fff; position: sticky; top: 0; z-index: 10; }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
 .brand { text-decoration: none; font-family: Georgia, serif; font-size: 1.3rem; letter-spacing: .12em; }
 .brand span { color: var(--gold); }
@@ -91,7 +121,7 @@ p { margin: 0 0 .6rem; }
 label { display: flex; flex-direction: column; gap: .3rem; font-size: .85rem; font-weight: 600; margin-bottom: .8rem; }
 input, select, textarea {
   font: inherit; font-weight: 400; padding: .6rem .7rem; border: 1px solid #cfc7b8;
-  border-radius: 6px; background: #fff; color: var(--ink);
+  border-radius: 6px; background: #fff; color: var(--ink-text-area);
 }
 input:focus, select:focus, textarea:focus { outline: 2px solid var(--gold); border-color: var(--gold); }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; }
@@ -134,7 +164,7 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--gold); bord
 .gateway-banner { background: #fff7e0; border: 1px dashed var(--gold); padding: .7rem 1rem; border-radius: 6px; text-align: center; margin-bottom: 1.2rem; font-size: .92rem; }
 .pay-layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.2rem; align-items: start; }
 
-.footer { background: var(--ink); color: #d8d2c6; padding: 2rem 0; margin-top: 2rem; }
+.footer { background: var(--navcolor); color: #d8d2c6; padding: 2rem 0; margin-top: 2rem; }
 .footer .muted { color: #9a9387; }
 
 @media (max-width: 720px) {

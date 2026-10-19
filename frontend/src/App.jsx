@@ -3,6 +3,7 @@ import Landing from './pages/Landing.jsx';
 import Booking from './pages/Booking.jsx';
 import Payment from './pages/Payment.jsx';
 import Confirmation from './pages/Confirmation.jsx';
+import ThemeToggle from './components/ThemeToggle';
 
 function NotFound() {
   return (
@@ -18,12 +19,14 @@ export default function App() {
   return (
     <>
       <header className="nav">
+        
         <div className="container nav-inner">
           <Link to="/" className="brand">JW <span>MARRIOTT</span></Link>
           <nav>
             <a href="/#habitaciones">Habitaciones</a>
             <a href="/#horarios">Horarios</a>
             <Link to="/reservar" className="btn btn-sm">Reservar</Link>
+            <ThemeToggle />
           </nav>
         </div>
       </header>
