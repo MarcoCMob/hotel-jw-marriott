@@ -1,0 +1,32 @@
+name: CD - Deployment Pipeline
+
+on:
+  push:
+    branches: [ "main", "feature/integrar-linters-ci" ]
+
+jobs:
+  deploy-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Configurar Node.js (Versión 20)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: 📦 Instalar dependencias globales, backend y frontend
+        run: npm run install-all
+        env:
+          npm_config_legacy_peer_deps: "true"
+
+      - name: 🏗️ Compilar Frontend (Vite)
+        run: npm run build
+
+      - name: 🚀 Simulación de Despliegue en Producción
+        run: |
+          echo "¡El código pasó el CD con éxito!"
+          echo "Simulación de despliegue completada correctamente."
