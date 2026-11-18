@@ -1,0 +1,32 @@
+name: CI - Full-Stack Quality & Tests
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Configurar Node.js (Versión 20)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: 📦 Instalar todas las dependencias (Raíz, Backend y Frontend)
+        run: npm run install:all
+        env:
+          npm_config_legacy_peer_deps: "true"
+
+      - name: 🔍 Ejecutar validación de Linting (Backend y Frontend)
+        run: npm run lint
+
+      - name: 🧪 Ejecutar pruebas unitarias e integración (Jest)
+        run: npm --prefix backend test

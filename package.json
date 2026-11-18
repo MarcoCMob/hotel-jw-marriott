@@ -7,9 +7,13 @@
     "install:all": "npm install && npm --prefix backend install && npm --prefix frontend install",
     "db:init": "npm --prefix backend run db:init",
     "dev": "concurrently -n api,web -c yellow,cyan \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
-    "build": "npm --prefix frontend run build"
+    "build": "npm --prefix frontend run build",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "npm --prefix backend run lint",
+    "lint:frontend": "npm --prefix frontend run lint"
   },
   "devDependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.1.0",
+    "eslint": "^10.15.0"
   }
 }
