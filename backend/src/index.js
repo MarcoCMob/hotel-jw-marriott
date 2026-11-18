@@ -15,6 +15,7 @@ app.get('/api/health', async (_req, res) => {
     await pool.query('SELECT 1');
     res.json({ ok: true });
   } catch (err) {
+    console.log(err);
     res.status(503).json({ ok: false, error: 'Sin conexión a MySQL' });
   }
 });
